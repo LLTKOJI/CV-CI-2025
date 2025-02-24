@@ -1,0 +1,66 @@
+title: "ETL de Microsoft SQL a Oracle con Node.js"
+description: "Desarrollo de un proceso de ETL para migrar datos de Microsoft SQL a Oracle, optimizando el rendimiento y la integridad de los datos."
+
+title_en: "ETL from Microsoft SQL to Oracle with Node.js"
+description_en: "Development of an ETL process to migrate data from Microsoft SQL to Oracle, optimizing performance and data integrity."
+
+icon: "🔄"
+---
+
+# ETL de Microsoft SQL a Oracle con Node.js
+
+Este proyecto consistió en la implementación de un proceso **ETL (Extracción, Transformación y Carga)** para **migrar datos de Microsoft SQL Server a Oracle**. Fue un desarrollo realizado de manera individual, asegurando la **integridad de los datos, la eficiencia en la transferencia y la escalabilidad del proceso**.
+
+## Descripción del Proyecto
+
+La migración de bases de datos entre sistemas heterogéneos como SQL Server y Oracle requiere una estrategia bien definida para manejar **diferencias en esquemas, optimización de consultas y consistencia de datos**. El proceso ETL desarrollado incluyó:
+
+### 🔹 Extracción de datos (Extract)
+- Conexión a Microsoft SQL Server mediante **Node.js** y la librería `mssql`.
+- Obtención de datos en bloques optimizados para evitar sobrecarga en la base de datos origen.
+
+### 🔹 Transformación de datos (Transform)
+- Normalización de formatos de datos según la estructura de Oracle.
+- Conversión de tipos de datos incompatibles entre SQL Server y Oracle.
+- Validación de la integridad referencial antes de la carga.
+
+### 🔹 Carga de datos (Load)
+- Inserción de datos en Oracle utilizando **Batch Processing** para optimizar el rendimiento.
+- Uso de la librería `oracledb` para la conexión y ejecución de transacciones seguras.
+- Manejo de **logs y errores** para depuración y monitoreo del proceso.
+
+## Tecnologías Utilizadas
+
+- **Node.js** (Plataforma de ejecución)
+- **mssql** (Conexión con Microsoft SQL Server)
+- **oracledb** (Interfaz de conexión con Oracle)
+- **Streams y Batch Processing** para eficiencia en la migración
+- **Shell scripting** para automatización del proceso
+
+## Desafíos y Soluciones
+
+### 🛠 Diferencias de tipos de datos
+- Implementé una capa de conversión de datos para mapear correctamente entre SQL Server y Oracle.
+- Uso de funciones personalizadas para formatear fechas, números y datos binarios.
+
+### 🛠 Optimización del rendimiento
+- Implementación de **Batch Inserts** para reducir el tiempo de inserción masiva.
+- Uso de **Índices temporales** en Oracle para acelerar consultas previas a la migración.
+
+### 🛠 Gestión de errores y recuperación
+- Implementación de **logs detallados** para identificar posibles fallos en la migración.
+- Creación de un sistema de **reintentos automáticos** en caso de fallos intermitentes.
+
+## Impacto del Proyecto
+
+- **Reducción del tiempo de migración** en un 40% comparado con métodos tradicionales.
+- **Mejora en la integridad de datos** al reducir inconsistencias durante la transferencia.
+- **Automatización del proceso ETL**, permitiendo programaciones periódicas sin intervención manual.
+
+## Rol en el Proyecto
+
+🚀 **Desarrollador único**: Diseñé, implementé y optimicé cada fase del proceso ETL, asegurando eficiencia y escalabilidad en la migración de datos.
+
+> "Este proyecto demuestra cómo **Node.js** puede ser una herramienta poderosa para construir procesos ETL eficientes, incluso en migraciones complejas entre bases de datos heterogéneas."
+
+---

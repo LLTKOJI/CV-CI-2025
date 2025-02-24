@@ -1,46 +1,70 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
+import Sidebar from '../components/Sidebar.astro';
+import CardIndex from '../components/CardIndex.astro';
+import SkillCategory from '../components/SkillCategory.astro';
+import Social from '../components/Social.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import '../styles/global.css';
+import '../styles/sidebar.css';
+import { socials, cards, skills, navItems } from '../content/data/db';
+
+type Project = CollectionEntry<'projects'>;
+
+const projects: Project[] = await getCollection('projects');
 ---
 
 <Layout>
   <Header />
+  <div class="flex">
+    <Sidebar />
+    <main class="flex-1 p-4">
+      <section>
+        <h2>Sobre Mí</h2>
+        <div class="grid gap-6 md:grid-cols-2">
+          {cards.map((card, index) => (
+            <CardIndex
+              title={card.title}
+              description={card.description}
+            />
+          ))}
+        </div>
+      </section>
 
-  <section>
-    <h2>Sobre Mí</h2>
-    <p>
-      Estudiante de Ingeniería en Sistemas y Técnico en Informática con experiencia en desarrollo backend y bases de datos. 
-      Habilidades en Node.js, Microsoft SQL, Oracle DB, MongoDB, JavaScript y Visual Basic. Además, cuento con conocimientos 
-      en mantenimiento y ensamblaje de computadoras. Apasionado por la tecnología y la optimización de sistemas, busco 
-      oportunidades para seguir creciendo en el ámbito de TI.
-    </p>
-  </section>
+      <section>
+        <h2>Proyectos Destacados</h2>
+        <div class="grid gap-6 md:grid-cols-2">
+          {projects.map((project: Project) => (
+            <CardIndex
+              title={project.data.title}
+              description={project.data.description}
+              icon={project.data.icon}
+              href={`/projects/${project.slug}`}
+            />
+          ))}
+        </div>
+      </section>
 
-  <section>
-    <h2>Proyectos Destacados</h2>
-    <ul>
-      <li>
-        <strong>ETL de Microsoft SQL a Oracle con Node.js</strong>
-        <p>Desarrollo de un proceso de ETL (Extracción, Transformación y Carga) para migrar datos de Microsoft SQL a Oracle.</p>
-        <p><strong>Tecnologías utilizadas:</strong> Node.js</p>
-        <p><strong>Rol:</strong> Desarrollador único (proyecto realizado de manera individual).</p>
-      </li>
+      <section>
+        <SkillCategory 
+          name="Habilidades"
+          name_en="Skills"
+          skills={skills}
+        />
+      </section>
+    </main>
+  </div>
 
-      <li>
-        <strong>Backend para aplicación de delivery</strong>
-        <p>Creación del backend en Node.js para una aplicación de delivery, integrando una base de datos en Microsoft SQL y desarrollando APIs.</p>
-        <p><strong>Tecnologías utilizadas:</strong> Node.js (backend), Microsoft SQL (base de datos), JavaScript (frontend)</p>
-        <p><strong>Rol:</strong> Desarrollador backend.</p>
-      </li>
-
-      <li>
-        <strong>Sistema completo para un restaurante chino</strong>
-        <p>Desarrollo de un sistema de gestión para un restaurante chino.</p>
-        <p><strong>Tecnologías utilizadas:</strong> PHP con Laravel (frontend) y Spring Boot (backend).</p>
-        <p><strong>Rol:</strong> Desarrollo completo del sistema (proyecto individual).</p>
-      </li>
-    </ul>
-  </section>
+  <div class="mt-12 flex justify-center space-x-6">
+    {socials.map((social) => (
+      <Social
+        name={social.name}
+        url={social.url}
+        icon={social.icon}
+      />
+    ))}
+  </div>
 
   <footer>
     <p>Contacto: <a href="mailto:cizaguirre056@gmail.com">cizaguirre056@gmail.com</a></p>
