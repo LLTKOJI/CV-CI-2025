@@ -1,46 +1,21 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root {
-  --primary: #FF6F61; 
-  --secondary: #FFB6B3;
-  --highlight: #D64545; 
-  --dark-bg: #8B0000; 
-  --text-light: #FFFFFF;
-  --text-dark: #333333; 
-}
 
-body {
-  @apply bg-white text-gray-900;
-}
+@layer base {
+  :root {
+    --primary: 255 111 97; /* #FF6F61 en formato RGB */
+    --secondary: 255 182 179;
+    --highlight: 214 69 69;
+    --dark-bg: 139 0 0;
+  }
 
-h1 {
-  @apply text-3xl font-bold text-[var(--primary)] mb-4 mt-8;
-}
+  h1 {
+    @apply text-3xl font-bold mb-4 mt-8 text-[var(--primary)];
+  }
 
-h2 {
-  @apply text-2xl font-semibold text-[var(--highlight)] mb-4 mt-8;
-}
-
-h3 {
-  @apply text-xl font-semibold text-[var(--secondary)] mb-3 mt-6;
-}
-
-p {
-  @apply mb-4 text-gray-800;
-}
-
-a {
-  @apply text-[var(--highlight)] hover:text-[var(--secondary)];
-}
-
-button {
-  @apply bg-[var(--primary)] text-white px-4 py-2 rounded-md shadow-md;
-}
-
-code {
-  @apply bg-[var(--secondary)] text-[var(--highlight)] px-1 py-0.5 rounded;
-}
-
-blockquote {
-  @apply border-l-4 border-[var(--primary)] pl-4 italic text-gray-700;
+  .text-primary {
+    @apply text-[var(--primary)];
+  }
 }
