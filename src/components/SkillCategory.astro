@@ -1,0 +1,25 @@
+---
+interface Props {
+  name: string;
+  skills: Array<{ name: string; level: number }>;
+}
+
+const { name, skills } = Astro.props;
+---
+
+<section class="mb-12">
+  <h2 class="text-2xl font-bold text-[#FF6F61] mb-6">{name}</h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    {skills.map((skill) => (
+      <div class="bg-white p-4 rounded-lg shadow-md">
+        <h3 class="font-semibold text-lg mb-2">{skill.name}</h3>
+        <div class="w-full bg-gray-200 rounded-full h-2">
+          <div 
+            class="bg-[#FF6F61] h-2 rounded-full" 
+            style={`width: ${skill.level}%`}
+          />
+        </div>
+      </div>
+    ))}
+  </div>
+</section>

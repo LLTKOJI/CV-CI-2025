@@ -1,0 +1,36 @@
+.sidebar {
+    background-color: var(--dark-bg);
+    color: var(--text-light);
+    padding: 15px;
+    height: 100vh;
+    width: 250px;
+  }
+  
+  .sidebar-nav,
+  .sidebar-nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .sidebar-nav li {
+    padding: 10px;
+    border-bottom: 1px solid var(--secondary);
+  }
+  
+  .sidebar-nav li:last-child {
+    border-bottom: none;
+  }
+  
+  .sidebar-nav a {
+    color: var(--text-light);
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .sidebar-nav a:hover {
+    background-color: var(--primary);
+  }
+  

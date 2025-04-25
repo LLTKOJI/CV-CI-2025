@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base {
+  :root {
+    --primary: 255 111 97; /* #FF6F61 en formato RGB */
+    --secondary: 255 182 179;
+    --highlight: 214 69 69;
+    --dark-bg: 139 0 0;
+  }
+
+  h1 {
+    @apply text-3xl font-bold mb-4 mt-8 text-[var(--primary)];
+  }
+
+  .text-primary {
+    @apply text-[var(--primary)];
+  }
+}

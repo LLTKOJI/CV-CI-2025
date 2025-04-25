@@ -1,53 +1,97 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
+import Sidebar from '../components/Sidebar.astro';
+import CardIndex from '../components/CardIndex.astro';
+import SkillCategory from '../components/SkillCategory.astro';
+import Social from '../components/Social.astro';
+import { getCollection } from 'astro:content';
+import { socials, cards, skills } from '../content/data/db';
+
+import '../styles/global.css';
+import '../styles/sidebar.css';
+
+const projects = await getCollection('projects');
 ---
 
 <Layout>
   <Header />
+  
+  <div class="flex min-h-screen">
+    <Sidebar />
+    
+    <main class="flex-1 p-8 bg-gray-50">
+      {/* Sección Sobre Mí */}
+      <section class="mb-12">
+        <h2 class="text-3xl font-bold text-[#FF6F61] mb-6">Sobre Mí</h2>
+        <div class="grid gap-6 md:grid-cols-2">
+          {cards.map((card) => (
+            <CardIndex
+              title={card.title}
+              description={card.description}
+            />
+          ))}
+        </div>
+      </section>
 
-  <section>
-    <h2>Sobre Mí</h2>
-    <p>
-      Estudiante de Ingeniería en Sistemas y Técnico en Informática con experiencia en desarrollo backend y bases de datos. 
-      Habilidades en Node.js, Microsoft SQL, Oracle DB, MongoDB, JavaScript y Visual Basic. Además, cuento con conocimientos 
-      en mantenimiento y ensamblaje de computadoras. Apasionado por la tecnología y la optimización de sistemas, busco 
-      oportunidades para seguir creciendo en el ámbito de TI.
-    </p>
-  </section>
+      {/* Sección Proyectos */}
+      <section class="mb-12">
+        <h2 class="text-3xl font-bold text-[#FF6F61] mb-6">Proyectos Destacados</h2>
+        <div class="grid gap-6 md:grid-cols-2">
+          {projects.map((project) => (
+            <CardIndex
+              title={project.data.title}
+              description={project.data.description}
+            />
+          ))}
+        </div>
+      </section>
 
-  <section>
-    <h2>Proyectos Destacados</h2>
-    <ul>
-      <li>
-        <strong>ETL de Microsoft SQL a Oracle con Node.js</strong>
-        <p>Desarrollo de un proceso de ETL (Extracción, Transformación y Carga) para migrar datos de Microsoft SQL a Oracle.</p>
-        <p><strong>Tecnologías utilizadas:</strong> Node.js</p>
-        <p><strong>Rol:</strong> Desarrollador único (proyecto realizado de manera individual).</p>
-      </li>
+      {/* Sección Habilidades */}
+      <section class="mb-12">
+        <h2 class="text-3xl font-bold text-[#FF6F61] mb-6">Habilidades Técnicas</h2>
+        {Object.entries(skills).map(([categoryName, categorySkills]) => (
+          <SkillCategory 
+            name={categoryName} 
+            skills={categorySkills}
+          />
+        ))}
+      </section>
+    </main>
+  </div>
 
-      <li>
-        <strong>Backend para aplicación de delivery</strong>
-        <p>Creación del backend en Node.js para una aplicación de delivery, integrando una base de datos en Microsoft SQL y desarrollando APIs.</p>
-        <p><strong>Tecnologías utilizadas:</strong> Node.js (backend), Microsoft SQL (base de datos), JavaScript (frontend)</p>
-        <p><strong>Rol:</strong> Desarrollador backend.</p>
-      </li>
+  {/* Redes Sociales */}
+  <div class="py-8 bg-white shadow-inner">
+    <div class="flex justify-center space-x-6">
+      {socials.map((social) => (
+        <Social
+          url={social.url}
+          icon={social.icon}
+        />
+      ))}
+    </div>
+  </div>
 
-      <li>
-        <strong>Sistema completo para un restaurante chino</strong>
-        <p>Desarrollo de un sistema de gestión para un restaurante chino.</p>
-        <p><strong>Tecnologías utilizadas:</strong> PHP con Laravel (frontend) y Spring Boot (backend).</p>
-        <p><strong>Rol:</strong> Desarrollo completo del sistema (proyecto individual).</p>
-      </li>
-    </ul>
-  </section>
-
-  <footer>
-    <p>Contacto: <a href="mailto:cizaguirre056@gmail.com">cizaguirre056@gmail.com</a></p>
-    <p>
-      <a href="https://github.com/LLTKOJI" target="_blank" style="color: white; text-decoration: none;">
-        <img src="https://cdn-icons-png.flaticon.com/512/733/733609.png" alt="GitHub" width="24" style="vertical-align: middle;" /> GitHub
-      </a>
-    </p>
+  {/* Footer */}
+  <footer class="bg-[#FF6F61] py-4 text-white">
+    <div class="max-w-4xl mx-auto text-center">
+      <p class="mb-2">Contacto: 
+        <a href="mailto:cizaguirre056@gmail.com" class="underline hover:text-[#FFB6B3]">
+          cizaguirre056@gmail.com
+        </a>
+      </p>
+      <p>
+        <a 
+          href="https://github.com/LLTKOJI" 
+          target="_blank"
+          class="inline-flex items-center gap-2 hover:text-[#FFB6B3]"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+          </svg>
+          GitHub
+        </a>
+      </p>
+    </div>
   </footer>
 </Layout>
